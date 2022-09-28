@@ -1,0 +1,16 @@
+@media (max-width: 300px) {
+  .width300 {
+    width: 270px;
+  }
+  .headline {
+    width: 100%;
+    position: absolute;
+    top: 48px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  h1 {
+    display: flex;
+    justify-content: center;
+  }
+}
