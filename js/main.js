@@ -1,5 +1,9 @@
 let startDate = new Date().getTime();
 let endDate = document.getElementById("chooseDate");
+let callDate = [];
+let differenzDays = moment().subtract(123, "days");
+let nextDay = [];
+let portIsPossible = true;
 
 function deltaDays() {
   let end = endDate.value;
@@ -12,6 +16,10 @@ function deltaDays() {
     count.innerHTML += /*html*/ `${result}`;
     statusCall(result);
   }
+  if (portIsPossible === false) {
+    preCallDate();
+  }
+  document.getElementById("confirmInput").classList.add("d-none");
 }
 
 function statusCall(result) {
@@ -21,10 +29,12 @@ function statusCall(result) {
     statusCall.innerHTML +=
       `<img src="./img/green.png" alt="" style="width: 16px; margin-right:4px">` +
       `Ja`;
+    portIsPossible = true;
   } else {
     statusCall.innerHTML +=
       `<img src="./img/red.png" alt="" style="width: 16px; margin-right:4px">` +
       `Nein`;
+    portIsPossible = false;
   }
   if (result <= 0) {
     statusCall.innerHTML = ` `;
@@ -46,19 +56,40 @@ function maxDays() {
   `;
 }
 
-function preDating() {
-  let vorDate = startDate + 6048000000;
-  let dVorDate = new Date(vorDate);
-  document.getElementById("vorDatierung").innerHTML = ``;
-  document.getElementById("vorDatierung").innerHTML += `${
-    dVorDate.getDate() +
-    "." +
-    (dVorDate.getMonth() + 1) +
-    "." +
-    dVorDate.getFullYear()
-  }
-`;
+// Muss noch ausgegeben werden in APP
+function preCallDate() {
+  let portLine = document.getElementById("portPossibleClass");
+  portLine.classList.remove("d-none");
+  let end = endDate.value;
+  let newDatePort = moment(end);
+  let result = newDatePort.subtract(123, "days");
+  let newDateForm = result.format("DD.M.YYYY");
+  nextDay.push(newDateForm);
+  console.log("IST ES?" + newDateForm);
+  document.getElementById("portPossible").innerHTML = "";
+  document.getElementById("portPossible").innerHTML += /*html*/ `${nextDay}`;
 }
+
+// Version 1.1
+// Check how early the consumer can port his number
+
+// ------------------------------ // ------------------------------
+// Version 1.0
+// since Version 1.1 no more usefull
+// function preDating() {
+//   let vorDate = startDate + 6048000000;
+//   let dVorDate = new Date(vorDate);
+//   document.getElementById("vorDatierung").innerHTML = ``;
+//   document.getElementById("vorDatierung").innerHTML += `${
+//     dVorDate.getDate() +
+//     "." +
+//     (dVorDate.getMonth() + 1) +
+//     "." +
+//     dVorDate.getFullYear()
+//   }
+// `;
+// }
+// ------------------------------ // ------------------------------
 
 function today() {
   let today = new Date();
@@ -67,19 +98,14 @@ function today() {
     today.getDate() + "." + (today.getMonth() + 1) + "." + today.getFullYear();
 }
 
-function check() {
-  document.getElementById("check").classList.add("d-none");
-  document.getElementById("modeToggler").classList.remove("d-none");
-  deltaDays();
-  today();
-  preDating();
-  maxDays();
-}
-
 function reset() {
   document.getElementById("dayCount").innerHTML = `-`;
   document.getElementById("status").innerHTML = `-`;
   document.getElementById("chooseDate").value = ``;
+  document.getElementById("portPossibleClass").classList.add("d-none");
+  nextDay = [];
+  portIsPossible = true;
+  document.getElementById("confirmInput").classList.remove("d-none");
 }
 
 function changeMode() {
@@ -89,4 +115,15 @@ function changeMode() {
   modelight.classList.toggle("light");
   let modedark = document.getElementById("modedark");
   modedark.classList.toggle("dark");
+}
+
+function check() {
+  maxDays();
+  document.getElementById("check").classList.add("d-none");
+  document.getElementById("modeToggler").classList.remove("d-none");
+  document.getElementById("portPossibleClass").classList.add("d-none");
+  // deltaDays();
+  today();
+
+  // preDating();
 }

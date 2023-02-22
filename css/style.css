@@ -4,6 +4,10 @@ body {
   overflow: hidden;
 }
 
+.d-none {
+  display: none;
+}
+
 a:link {
   text-decoration: none;
   color: white;
