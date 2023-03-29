@@ -8,6 +8,21 @@ body {
   display: none;
 }
 
+.calc-link {
+  margin-left: 16px;
+  margin-top: 16px;
+  position: absolute;
+  width: 24px;
+  z-index: 100 !important;
+}
+.calc-link2 {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 24px;
+  z-index: 100 !important;
+}
+
 a:link {
   text-decoration: none;
   color: white;
@@ -95,8 +110,8 @@ input {
 
 .mode-change {
   position: absolute;
-  top: 8px !important;
-  right: 8px;
+  top: 12px !important;
+  right: 12px;
   border-radius: 50%;
 }
 
